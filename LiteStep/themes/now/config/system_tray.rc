@@ -1,0 +1,9 @@
+VTrayY -20
+VTrayHeight 16
+VTrayAutoSize
+VTrayAlwaysOnTop
+VTrayHidden
+VTrayIconSpacingX 2
+VTrayBgColor "$BackgroundColor$"
+VTrayBorderColor "$BorderColor$"
+VTrayBorderSize 1

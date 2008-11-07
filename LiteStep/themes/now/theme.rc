@@ -1,0 +1,19 @@
+OTSMajorVersion 2
+OTSMinorVersion 0
+
+ThemeName "now"
+ThemeAuthor "Nikolai Weibull"
+
+ConfigDir "$ThemeDir$config\"
+
+*NetLoadModule rabidvwm-1.2.2
+*NetLoadModule vtray-1.10
+*NetLoadModule xpaintclass-1.0
+*NetLoadModule lsxcommand-2.0.2
+
+NetLoadModuleOnLoad !NetUnloadModule .
+
+include "$ConfigDir$base.rc"
+include "$ConfigDir$vwm.rc"
+include "$ConfigDir$system_tray.rc"
+include "$ConfigDir$lsxcommand.rc"

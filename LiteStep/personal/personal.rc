@@ -1,0 +1,47 @@
+OTSCfgMajorVersion 2
+OTSCfgMinorVersion 0
+
+include "$PersonalDir$evars.rc"
+include "$PersonalDir$hotkey.rc"
+
+*NetLoadModule jkey-0.39
+*NetLoadModule wndman-0.15
+
+jKeyVKTable "$PersonalDir$jkey\vk104.txt"
+jKeyUseHotkeyDef
+
+CommandHistoryFile "$PersonalDir$lsxcommand\history.ini"
+CommandHistoryEntries 512
+CommandUnixHistory
+CommandSearchEngineList *CommandSearchEngine
+
+VWMNoGathering
+VWMFocusTop
+VWMHideTaskOnSwitch
+MonitorNames pri one
+VWMSwitchMonitor pri
+VWMKeepWindowsWithParent
+
+*VWMStartWindowsOnDesktop #c wndclass_desked_gsk 2
+*VWMStartWindowsOnDesktop #t now.ath.cx 3
+*VWMStartWindowsOnDesktop #c TSSHELLWND 4
+*VWMStartWindowsOnDesktop #c WindowsForms10.Window.8.app4 5
+
+*WndOnCreate "PuTTY" "Cygwin" !WndMove %wnd% 2 1
+*WndOnCreate "PuTTY" "now.ath.cx" !WndMoveCenter %wnd%
+*WndOnCreate "Emacs" "" !WndMove %wnd% 1 1
+*WndOnCreate "Emacs" "" !WndMove %wnd% -1 -1
+*WndOnCreate "MozillaUIWindowClass" "" !WndMove %wnd% 719 1
+*WndOnCreate "MozillaUIWindowClass" "" !WndMove %wnd% 0 -1
+*WndOnCreate "MozillaUIWindowClass" "" !WndSize %wnd% 961 1050
+*WndOnCreate "TW4Win2Class" "" !WndMove %wnd% 719 1
+*WndOnCreate "TW4Win2Class" "" !WndMove %wnd% 0 -1
+*WndOnCreate "TW4Win2Class" "" !WndSize %wnd% 961 280
+*WndOnCreate "" "SDL Trados TagEditor" !WndMove %wnd% 719 275
+*WndOnCreate "" "SDL Trados TagEditor" !WndSize %wnd% 961 775
+*WndOnCreate "Vim" "" !WndMove %wnd% 719 1
+*WndOnCreate "Vim" "" !WndMove %wnd% 0 -1
+*WndOnCreate "Vim" "" !WndSize %wnd% 956 1043
+*WndOnCreate "iTunes" "" !WndMaximize %wnd%
+
+LSUseSystemDDE
