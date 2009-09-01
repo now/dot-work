@@ -150,8 +150,8 @@ $(eval $(call GROUP_template,$(APPDATAFILES),$(appdatadir)/Dialog\ Death))
 STARTUPFILES = \
 	       start-up/clipx.lnk \
 	       start-up/firefox.lnk \
-	       start-up/groupwise.lnk \
 	       start-up/hotkeys.lnk \
+	       start-up/outlook.lnk \
 	       start-up/sh.lnk \
 	       start-up/totalcmd.lnk
 
