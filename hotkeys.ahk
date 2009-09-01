@@ -1,65 +1,19 @@
 #NoEnv
 #SingleInstance force
 
+SetTitleMatchMode Regex
+
 CTRL_M := Chr(10)
 CTRL_K := Chr(11)
 
 WM_COMMAND := 0x111
 
-GroupWiseFolders[1][name] := "Inbox"
-GroupWiseFolders[1][key] := "i"
-GroupWiseFolders[1][input] := "{Down}"
-GroupWiseFolders[2][name] := "CAT Inbox"
-GroupWiseFolders[2][key] := "c"
-GroupWiseFolders[2][input] := "{c 4}{Right}c"
-GroupWiseFolders[3][name] := "CAT User"
-GroupWiseFolders[3][key] := "n"
-GroupWiseFolders[3][input] := "{c 4}{Right}c{Right}n"
-GroupWiseFolders[4][name] := "CAT User Done"
-GroupWiseFolders[4][key] := "d"
-GroupWiseFolders[4][input] := "{c 4}{Right}c{Right}n{Right}d"
-GroupWiseFolders[5][name] := "Sent Items"
-GroupWiseFolders[5][key] := "s"
-GroupWiseFolders[5][input] := "s"
-GroupWiseFolderCount := 5
-
-#Include G:\Produktion\CAT\Makron\autohotkey\include\groupwise.ahk
-
 #Include lib\autohotkey\comhelper.ahk
 #Include lib\autohotkey\digraphs.ahk
 
-NotifyAboutResponseToTask(FromMessage, ExpandCollapse)
-{
-  if (FromMessage and (!GroupWiseMessageActionSend() or !GroupWiseFocusMessageList(true)))
-    return false
-  
-  if (ExpandCollapse and (!GroupWiseThreadExpand() or !GroupWiseThreadPrevious()))
-    return false
-  
-  if (!GroupWiseActionReplyWithOptions("Check", "Check"))
-    return 0
-  ControlGetText MailContents, RichEdit20W2
-  WinGetTitle Title, ahk_class OFCalView
-  Found := RegExMatch(Title, " - (.*)$", Matches)
-  MailBox := "my CAT inbox"
-  if Matches1 = CAT Inbox
-    MailBox := "the shared CAT inbox"
-  else if Matches1 = Done
-    MailBox := "my Done folder"
-  else if Matches1 = Nikolai
-    MailBox := "my CAT inbox"
-  else if Found > 0
-    MailBox := Matches1
-  MailContents := "A response has been posted to this task.`r`nPlease see the discussion thread in " . MailBox . "." . MailContents
-  ControlSetText RichEdit20W2, %MailContents%
-  if (ErrorLevel != 0)
-    return 0
-  return GroupWiseMessageActionSend()
-}
-
 TagEditorNormalMode()
 {
-  Hotkey IfWinActive, SDL Trados TagEditor
+  Hotkey IfWinActive, ^SDL Trados TagEditor
   Hotkey o, On
   Hotkey +o, On
   Hotkey k, TagEditorOpenNextNo100Get
@@ -84,7 +38,7 @@ TagEditorInsertMode(Input)
 {
   if (Input != "")
     SendInput %Input%
-  Hotkey IfWinActive, SDL Trados TagEditor
+  Hotkey IfWinActive, ^SDL Trados TagEditor
   Hotkey ^q, TagEditorUnboundInsertMode
   Hotkey o, Off
   Hotkey +o, Off
@@ -110,7 +64,7 @@ TagEditorInsertMode(Input)
 TagEditorExitNormalModeImpl()
 {
   TagEditorNormalMode()
-  Hotkey IfWinActive, SDL Trados TagEditor
+  Hotkey IfWinActive, ^SDL Trados TagEditor
   Hotkey o, Off
   Hotkey +o, Off
   Hotkey k, Off
@@ -160,12 +114,18 @@ TagEditorCloseAll()
   CoUninitialize()
 }
 
-#IfWinActive Job Overview ahk_class WindowsForms10.Window.8.app4
+#IfWinActive ^Job Overview\*?$ ahk_class WindowsForms10.Window.8.app4
 !g::ControlFocus WindowsForms10.EDIT.app419
 
 !u::ControlFocus WindowsForms10.COMBOBOX.app42
 
-!w::SendInput !sWeibull{Enter}!o
+!w::
+Control Check, , WindowsForms10.BUTTON.app42
+if (ErrorLevel != 0)
+  return
+SendInput !sWeibull{Enter}
+SendInput !o
+return
 
 Escape::!c
 
@@ -179,7 +139,10 @@ WinWait Comments ahk_class WindowsForms10.Window.8.app4
 ControlSend WindowsForms10.BUTTON.app43, {Space}
 return
 
-#IfWinActive Nirvana ahk_class WindowsForms10.Window.8.app4
+#IfWinActive ^Customer$ ahk_class WindowsForms10.Window.8.app4
+Escape::!c
+
+#IfWinActive ^Nirvana ahk_class WindowsForms10.Window.8.app4
 !n::
 ControlFocus WindowsForms10.EDIT.app423
 if (ErrorLevel != 0)
@@ -221,114 +184,37 @@ WinWait Exit Application?, Are you sure you want to exit?, 2
 ControlSend Button1, {Enter}
 return
 
-#IfWinActive ahk_class OFCalView
-!m::GroupWiseFocusMessageList(0)
-
-!c::
-ControlFocus RichEdit20W8
+#IfWinActive Microsoft Outlook$ ahk_class rctrl_renwnd32
+!s::
+ControlFocus NetUIHWND1
 if (ErrorLevel = 0)
   return
-ControlFocus RichEdit20W6
-if (ErrorLevel = 0)
-  return
-ControlFocus RichEdit20W5
+SendInput !s
 return
 
-!l::ControlFocus SysTreeView321
+!c::ControlFocus _WwG1
 
-+^o::
-Click 316, 966, 2
-return
-ControlFocus SysListView322
-SendInput {Right}
-Sleep 100
-SendInput {Enter}
-Sleep 500
-SendInput {Enter}{Left}
-Sleep 1000
-ControlFocus RichEdit20W8
-return
+!l::ControlFocus SUPERGRID1
 
-^p::
-WinGetText MailContents
-if (RegExMatch(MailContents, "[A-Za-z]:\\(?:[^\\\n]+\\)*[^\\\n]+\n", PathInMailContents) > 0)
-  Clipboard := RegExReplace(PathInMailContents, "\s+$", "")
-return
-
-^d::
-if (!GroupWiseActionMarkCompleted()
-    or !GroupWiseActionReplyWithOptions("Check", "Check"))
-  return
-ControlGetText MailContents, RichEdit20W2
-ControlSetText RichEdit20W2, This task has been completed and can now be found in my Done folder.%MailContents%
-if (!GroupWiseMessageActionSend()
-    or !GroupWiseFocusMessageList(1)
-    or !GroupWiseActionReplyWithOptions("Uncheck", "Uncheck"))
-  return
-ControlSetText RichEdit20W2, This task has been completed.
-if (!GroupWiseMessageActionSend())
-  return
+!y::
+SendInput !ts
+WinWaitActive ^Trust Center$
+SendInput {Up 4}!g
+WinWaitActive ^COM Add-Ins$
+SendInput {PageUp 4}{Up}
+Sleep 50
+SendInput {Space}{Enter}
+WinWaitActive Microsoft Outlook$ ahk_class rctrl_renwnd32
+SendInput !ts
+WinWaitActive ^Trust Center$
+SendInput {Up 4}!g
+WinWaitActive ^COM Add-Ins$
+SendInput {PageUp 4}{Up}
+Sleep 50
+SendInput {Space}{Enter}
 return
 
-^+d::
-if (!GroupWiseActionReplyWithOptions("Check", "Check"))
-  return
-ControlGetText MailContents, RichEdit20W2
-ControlSetText RichEdit20W2, This task has been completed and can now be found in my Done folder.%MailContents%
-if (!GroupWiseMessageActionSend())
-  return
-return
-
-^s::
-if (!GroupWiseActionAccept())
-  return
-CATUser := GroupWiseFolderFromName("CAT User")
-GroupWiseMoveSelectionToFolder(CATUser)
-GroupWiseWaitActive()
-GroupWiseOpenFolder(CATUser)
-return
-
-g::GroupWiseOpenFolder(GroupWiseReadFolder())
-
-l::GroupWiseMoveSelectionToFolder(GroupWiseReadFolder())
-
-:*:cm::
-GroupWiseActionNewMail()
-return
-
-; Reply without message
-:*:rr::
-GroupWiseActionReplyWithOptions("Uncheck", "Check")
-return
-
-; Reply to Subject
-:*:rs::
-GroupWiseActionReplyWithOptions("Uncheck", "Uncheck", "{Tab}")
-return
-
-; Reply, Including message
-:*:ri::
-GroupWiseActionReplyWithOptions("Check", "Check")
-ControlGet Edit, Hwnd, , RichEdit20W2
-ControlGetText Text, , ahk_id %Edit%
-Text := RegExReplace(Text, "msi)^\s*(?:Hej(?:san)?)[\w\s-]*[,!]\s*$\s*", "`n")
-Text := RegExReplace(Text, "msi)={20,}.*?\s+Amesto Translations AB(?:,\s*|\s*\r\n)(?:PO\s+)?Box 3008.*?www.amesto.se\s+={20,}", "")
-Text := RegExReplace(Text, "msi)\s*^Amesto Translations AB(?:,\s*|\s*\r\n)(?:PO\s+)?Box 3008.*?www.amesto.se\s*$", "")
-Text := RegExReplace(Text, "msi)\s*=*\s*Amesto Translations is a member of the Amesto Group.*?Dun & Bradstreet.\s*=*\s*", "")
-Text := RegExReplace(Text, "msi)\s*Amesto Translations is the new name for Tekniktext.\r\nPlease note my new e-mail address.\s*", "`n")
-;Text := RegExReplace(Text, "msi)\s*={20,}.*?^www.amesto.se\s*$\s*={20,}(?:[^\n]*\n){2,6}={20,}\s*", "`n`n")
-;Text := RegExReplace(Text, "msi)\s+^Amesto Translations is the new name for Tekniktext.\s*$.*?^www.amesto.se\s*$\s*Amesto is a member.*?\r\n\r\n", "`n`n")
-ControlSetText, , %Text%, ahk_id %Edit%
-return
-
-^n::NotifyAboutResponseToTask(false, true)
-
-#IfWinActive ahk_class OFMailView
-^f::NotifyAboutResponseToTask(true, false)
-
-^n::NotifyAboutResponseToTask(true, true)
-
-#IfWinActive SDL Trados TagEditor
+#IfWinActive ^SDL Trados TagEditor
 ^+s::TagEditorSaveAll()
 
 ^w::SendInput ^{F4}
@@ -341,6 +227,12 @@ return
 
 ^l::PostMessage %WM_COMMAND%, 32875
 
+F3::
+SendInput ^f
+WinWaitActive Find
+SendInput {Enter}{Escape}
+return
+
 F8::TagEditorVerify()
 
 ^q::
@@ -348,7 +240,7 @@ F8::TagEditorVerify()
   return
 
 TagEditorUnboundInsertMode:
-  Hotkey IfWinActive, SDL Trados TagEditor
+  Hotkey IfWinActive, ^SDL Trados TagEditor
   Hotkey ^q, TagEditorReenterInsertMode
   Hotkey k, Off
   Hotkey +d, Off
@@ -434,7 +326,7 @@ Space::SendInput {PgDn}
 
 v::TagEditorVerify()
 
-#IfWinActive TranslatorTool
+#IfWinActive ^TranslatorTool
 ^u::
 InputBox nRows, Rows to Copy, How many rows do you want to copy to memory?
 if ErrorLevel
@@ -446,7 +338,7 @@ Loop %nRows% {
 }
 return
 
-#IfWinActive SDL Trados S-Tagger for FrameMaker
+#IfWinActive ^SDL Trados S-Tagger for FrameMaker
 +^d::
 SendInput !r
 ControlSend Button1, {Enter}
@@ -466,12 +358,20 @@ SendEvent ^!v3{Tab}{Tab}^!v3{Tab}{Tab}^!v3
 SetKeyDelay %Saved_KeyDelay%
 return
 
-#IfWinActive Find/Change ahk_class InDesign_Window:5660125
+#IfWinActive ^Find/Change$ ahk_class InDesign_Window:5660125
 Esc::SendInput !d
 !f::SendInput !x
 !r::SendInput !g
 
 #IfWinActive ahk_class Illustrator9
+F3::
+Saved_KeyDelay := A_KeyDelay
+SetKeyDelay 200
+SendEvent !frj
+SetKeyDelay %Saved_KeyDelay%
+return
+
+#IfWinActive ahk_class illustrator
 F3::
 Saved_KeyDelay := A_KeyDelay
 SetKeyDelay 200
@@ -508,14 +408,6 @@ return
 
 #IfWinActive ahk_class tdb_wndw_cls_edord
 !l::ControlFocus SysListView321
-
-#IfWinActive Picasa2
-^o::
-MouseGetPos X, Y
-SetDefaultMouseSpeed 0
-Click 172, 148
-MouseMove %X%, %Y%
-return
 
 #IfWinActive ahk_class IsoDraw5Class
 /::
@@ -621,17 +513,9 @@ if (digraph = "") {
   if (digraph = "")
     return
 }
-Send {Shift up}
 ClipSaved := ClipboardAll
 Transform Clipboard, Unicode, %digraph%
-; PostMessage 0x302, 0, 0, , A
-if WinActive("ahk_class PuTTY")
-  SendInput +{Insert}
-else if WinActive("ahk_class MozillaUIWindowClass")
-  SendInput ^v^v
-else
-  SendInput ^v
-Sleep 750
+SendInput %ClipBoard%
 ClipBoard := ClipSaved
 ClipSaved =
 return
