@@ -491,15 +491,11 @@ return
 #w::PostMessage 0x112, 0xf060, , , A
 
 ^k::
-if WinActive("ahk_class Emacs") or WinActive("ahk_class Vim") {
-  Hotkey ^k, Off
-  SendInput ^k
-  Hotkey ^k, On
-  return
-}
-Input Dg, L2 C
-if Dg = kk
-{
+if WinActive("ahk_class Emacs") or WinActive("ahk_class Vim") or WinActive("ahk_class PuTTY")
+  Dg := "kk"
+else
+  Input Dg, L2 C
+if (Dg = "kk") {
   Hotkey ^k, Off
   SendInput ^k
   Hotkey ^k, On
