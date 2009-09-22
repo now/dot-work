@@ -76,8 +76,6 @@ BINSHAREFILES = \
 $(eval $(call GROUP_template,$(BINSHAREFILES),~,,,755))
 
 APPDATAFILES = \
-	       GHISLER/languages/now.lng \
-	       GHISLER/languages/now.mnu \
 	       GHISLER/lsplugin.ini \
 	       GHISLER/no.bar \
 	       GHISLER/packers/rar/default.sfx \
@@ -141,6 +139,14 @@ appdatadir = $(call shell_quote,$(shell cygpath -u "$(APPDATA)"))
 
 $(eval $(call GROUP_template,$(APPDATAFILES),$(appdatadir)))
 $(eval $(call GROUP_template,$(APPDATABINFILES),$(appdatadir),,,755))
+
+PROGRAMFILESFILES = \
+		    GHISLER/languages/wcmd_now.lng \
+		    GHISLER/languages/wcmd_now.mnu
+
+programfilesdir = $(call shell_quote,$(shell cygpath -u "$(PROGRAMFILES)"))
+
+$(eval $(call GROUP_template,$(PROGRAMFILESFILES),$(programfilesdir)/totalcmd/language,,GHISLER/languages/))
 
 APPDATAFILES = \
 	       dialog-death.ini
