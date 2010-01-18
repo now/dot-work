@@ -103,50 +103,44 @@ APPDATAFILES = \
 	       LiteStep/themes/now/config/vwm.rc \
 
 APPDATABINFILES = \
-	       GHISLER/packers/rar/rar.exe \
-	       GHISLER/packers/rar/unrar.exe \
-	       GHISLER/plugins/wcx/7zip/7zip.wcx \
-	       GHISLER/plugins/wcx/iso/iso.wcx \
-	       GHISLER/plugins/wcx/targzbz2/targzbz2.wcx \
-	       GHISLER/plugins/wdx/dirsizecalc/dirsizecalc.wdx \
-	       GHISLER/plugins/wdx/encoding/encoding.wdx \
-	       GHISLER/plugins/wdx/unicodetest/unicodetest.wdx \
-	       GHISLER/plugins/wfx/environment/environment.wfx \
-	       GHISLER/plugins/wfx/registry/registry.wfx \
-	       GHISLER/plugins/wfx/sftp/password_crypter.dll \
-	       GHISLER/plugins/wfx/sftp/psftp.dll \
-	       GHISLER/plugins/wfx/sftp/sftp.wfx \
-	       GHISLER/plugins/wfx/sftp/wfx_sftp_cfg.dll \
-	       GHISLER/plugins/wlx/gswlx/gswlx.wlx \
-	       GHISLER/plugins/wlx/ieview/ieview.wlx \
-	       GHISLER/plugins/wlx/imagine/imagine.dll \
-	       GHISLER/plugins/wlx/imagine/imagine.wlx \
-	       GHISLER/plugins/wlx/imagine/plugin/j2k.dll \
-	       GHISLER/plugins/wlx/imagine/plugin/jbig.dll \
-	       GHISLER/plugins/wlx/ttfview/ttfview.wlx \
-	       GHISLER/tango_shell32.dll \
-	       GHISLER/tools/copy-to-multiple-folders.vbs \
-	       GHISLER/tools/execute-many.vbs \
-	       GHISLER/tools/work/add-files-to-trados-workbench-dialog.vbs \
-	       GHISLER/tools/work/isodraw-run-macro.vbs \
-	       GHISLER/tools/work/open-in-tradobeindecs.vbs \
-	       GHISLER/tools/work/open-in-tageditor-non-retardedly.vbs \
-	       GHISLER/tools/work/open-in-workbench-non-retardedly.vbs \
-	       GHISLER/tools/work/ttx2x.wsf
+		  GHISLER/languages/wcmd_now.lng \
+		  GHISLER/languages/wcmd_now.mnu \
+		  GHISLER/packers/rar/rar.exe \
+		  GHISLER/packers/rar/unrar.exe \
+		  GHISLER/plugins/wcx/7zip/7zip.wcx \
+		  GHISLER/plugins/wcx/iso/iso.wcx \
+		  GHISLER/plugins/wcx/targzbz2/targzbz2.wcx \
+		  GHISLER/plugins/wdx/dirsizecalc/dirsizecalc.wdx \
+		  GHISLER/plugins/wdx/encoding/encoding.wdx \
+		  GHISLER/plugins/wdx/unicodetest/unicodetest.wdx \
+		  GHISLER/plugins/wfx/environment/environment.wfx \
+		  GHISLER/plugins/wfx/registry/registry.wfx \
+		  GHISLER/plugins/wfx/sftp/password_crypter.dll \
+		  GHISLER/plugins/wfx/sftp/psftp.dll \
+		  GHISLER/plugins/wfx/sftp/sftp.wfx \
+		  GHISLER/plugins/wfx/sftp/wfx_sftp_cfg.dll \
+		  GHISLER/plugins/wlx/gswlx/gswlx.wlx \
+		  GHISLER/plugins/wlx/ieview/ieview.wlx \
+		  GHISLER/plugins/wlx/imagine/imagine.dll \
+		  GHISLER/plugins/wlx/imagine/imagine.wlx \
+		  GHISLER/plugins/wlx/imagine/plugin/j2k.dll \
+		  GHISLER/plugins/wlx/imagine/plugin/jbig.dll \
+		  GHISLER/plugins/wlx/ttfview/ttfview.wlx \
+		  GHISLER/tango_shell32.dll \
+		  GHISLER/tools/copy-to-multiple-folders.vbs \
+		  GHISLER/tools/execute-many.vbs \
+		  GHISLER/tools/work/add-files-to-trados-workbench-dialog.vbs \
+		  GHISLER/tools/work/isodraw-run-macro.vbs \
+		  GHISLER/tools/work/open-in-tradobeindecs.vbs \
+		  GHISLER/tools/work/open-in-tageditor-non-retardedly.vbs \
+		  GHISLER/tools/work/open-in-workbench-non-retardedly.vbs \
+		  GHISLER/tools/work/ttx2x.wsf
 
 
 appdatadir = $(call shell_quote,$(shell cygpath -u "$(APPDATA)"))
 
 $(eval $(call GROUP_template,$(APPDATAFILES),$(appdatadir)))
 $(eval $(call GROUP_template,$(APPDATABINFILES),$(appdatadir),,,755))
-
-PROGRAMFILESFILES = \
-		    GHISLER/languages/wcmd_now.lng \
-		    GHISLER/languages/wcmd_now.mnu
-
-programfilesdir = $(call shell_quote,$(shell cygpath -u "$(PROGRAMFILES)"))
-
-$(eval $(call GROUP_template,$(PROGRAMFILESFILES),$(programfilesdir)/totalcmd/language,,GHISLER/languages/))
 
 APPDATAFILES = \
 	       dialog-death.ini
