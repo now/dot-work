@@ -172,12 +172,3 @@ REGISTRYFILES = \
 
 install-registry:
 	for r in $(REGISTRYFILES); do $(REGEDIT) "$$r"; done
-
-install-printers:
-	cscript //Nologo $$WINDIR/system32/prnmngr.vbs -ac -p '\\ctx01\Nashuatec_Prod'
-
-install-theme:
-	rundll32.exe $$WINDIR/system32/shell32.dll,Control_RunDLL C:/WINDOWS/system32/desk.cpl desk,@Appearance /Action:OpenMSTheme /file:c:/home/nweibull/share/themes/ClearLooks/ClearLooks.msstyles
-	rundll32.exe setupapi,InstallHinfSection DefaultInstall 132 c:/home/nweibull/share/themes/ClearLooks/xFree Cursors/Install.inf
-	rundll32.exe setupapi,InstallHinfSection DefaultInstall 132 share/icons/Vanilla/install.inf
-	$(REGEDIT) registry/cursor-theme-vanilla.reg
