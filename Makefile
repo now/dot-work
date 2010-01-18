@@ -151,11 +151,12 @@ STARTUPFILES = \
 	       start-up/clipx.lnk \
 	       start-up/firefox.lnk \
 	       start-up/hotkeys.lnk \
+	       start-up/itunes.lnk \
 	       start-up/outlook.lnk \
 	       start-up/sh.lnk \
 	       start-up/totalcmd.lnk
 
-startupdir = $(call shell_quote,$(shell cygpath -P))/Autostart
+startupdir = $(call shell_quote,$(shell cygpath -P))/Startup
 
 $(eval $(call GROUP_template,$(STARTUPFILES),$(startupdir),,start-up/,755))
 
