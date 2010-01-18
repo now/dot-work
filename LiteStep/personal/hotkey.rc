@@ -1,5 +1,5 @@
 *Hotkey Win A !Execute "iTunes"
-*Hotkey Win C !Execute "putty.exe -load cygwin"
+*Hotkey Win P !Execute "putty.exe -load cygwin"
 
 *Hotkey CTRL+ALT R !Recycle
 
@@ -9,6 +9,9 @@
 *Hotkey WIN 4 !VWMDesk 4
 *Hotkey WIN 5 !VWMDesk 5
 *Hotkey WIN 6 !VWMDesk 6
+*Hotkey WIN 7 !VWMDesk 7
+*Hotkey WIN 8 !VWMDesk 8
+*Hotkey WIN 9 !VWMDesk 9
 
 *Hotkey WIN+SHIFT 1 !VWMMoveApp 1
 *Hotkey WIN+SHIFT 2 !VWMMoveApp 2
@@ -16,6 +19,9 @@
 *Hotkey WIN+SHIFT 4 !VWMMoveApp 4
 *Hotkey WIN+SHIFT 5 !VWMMoveApp 5
 *Hotkey WIN+SHIFT 6 !VWMMoveApp 6
+*Hotkey WIN+SHIFT 7 !VWMMoveApp 7
+*Hotkey WIN+SHIFT 8 !VWMMoveApp 8
+*Hotkey WIN+SHIFT 9 !VWMMoveApp 9
 
 *Hotkey WIN S !VTrayToggle
 
