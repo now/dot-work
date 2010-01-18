@@ -166,18 +166,15 @@ startupdir = $(call shell_quote,$(shell cygpath -P))/Autostart
 $(eval $(call GROUP_template,$(STARTUPFILES),$(startupdir),,start-up/,755))
 
 REGISTRYFILES = \
-		registry/citrix-client.reg \
 		registry/environment.reg \
 		registry/file-type-joy.reg \
 		registry/file-type-ord.reg \
 		registry/map-caps-lock-to-left-control.reg \
-		registry/no-sounds-sound-scheme.reg \
 		registry/open-in-tageditor-non-retardedly.reg \
 		registry/open-in-workbench-non-retardedly.reg \
 		registry/putty-sessions.reg \
 		registry/tageditor.reg \
-		registry/totalcmd.reg \
-		registry/xmousebuttoncontrol.reg
+		registry/totalcmd.reg
 
 install-registry:
 	for r in $(REGISTRYFILES); do $(REGEDIT) "$$r"; done
