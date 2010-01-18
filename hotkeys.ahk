@@ -114,13 +114,13 @@ TagEditorCloseAll()
   CoUninitialize()
 }
 
-#IfWinActive ^Job Overview\*?$ ahk_class WindowsForms10.Window.8.app4
-!g::ControlFocus WindowsForms10.EDIT.app419
+#IfWinActive ^Job Overview\*?$ ahk_class WindowsForms10.Window.8.app3
+!g::ControlFocus WindowsForms10.EDIT.app319
 
-!u::ControlFocus WindowsForms10.COMBOBOX.app42
+!u::ControlFocus WindowsForms10.COMBOBOX.app32
 
 !w::
-Control Check, , WindowsForms10.BUTTON.app42
+Control Check, , WindowsForms10.BUTTON.app32
 if (ErrorLevel != 0)
   return
 SendInput !sWeibull{Enter}
@@ -131,52 +131,21 @@ Escape::!c
 
 Enter::!o
 
-!m::
-ControlSend WindowsForms10.BUTTON.app422, {Space}
-if (ErrorLevel != 0)
-  return
-WinWait Comments ahk_class WindowsForms10.Window.8.app4
-ControlSend WindowsForms10.BUTTON.app43, {Space}
-return
-
-#IfWinActive ^Customer$ ahk_class WindowsForms10.Window.8.app4
+#IfWinActive ^Customer$ ahk_class WindowsForms10.Window.8.app3
 Escape::!c
 
-#IfWinActive ^Nirvana ahk_class WindowsForms10.Window.8.app4
+#IfWinActive ^Nirvana ahk_class WindowsForms10.Window.8.app3
 !n::
-ControlFocus WindowsForms10.EDIT.app423
+ControlFocus WindowsForms10.EDIT.app322
 if (ErrorLevel != 0)
   return
-ControlGet Edit, Hwnd, , WindowsForms10.EDIT.app423
+ControlGet Edit, Hwnd, , WindowsForms10.EDIT.app322
 if (ErrorLevel != 0)
   return
 SendMessage 177, 0, -1, , ahk_id %Edit%
 return
 
-!m::
-ControlSend WindowsForms10.BUTTON.app48, {Space}{Enter}
-if (ErrorLevel != 0)
-  return
-WinWait Comments ahk_class WindowsForms10.Window.8.app4
-WinGetPos, , , Width, Height
-WinMove, , , (A_ScreenWidth/2)-(Width/2), 0, Width, A_ScreenHeight
-return
-
-!j::ControlFocus WindowsForms10.SysListView32.app41
-
-Enter::
-SendInput {Enter}
-Sleep 100
-ControlGetFocus FocusedControl
-if (ErrorLevel != 0)
-  return
-if (FocusedControl = "WindowsForms10.EDIT.app423") {
-  ControlFocus WindowsForms10.SysListView32.app41
-  if (ErrorLevel != 0)
-    return
-  SendInput {Down}{Up}
-}
-return
+!j::ControlFocus WindowsForms10.SysListView32.app31
 
 !F4::
 WinClose
@@ -515,3 +484,5 @@ SendInput %ClipBoard%
 ClipBoard := ClipSaved
 ClipSaved =
 return
+
+#a::Run %ProgramFiles%\iTunes\iTunes
