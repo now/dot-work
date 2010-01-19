@@ -408,7 +408,7 @@ return
 Hotkey ^m, Off
 Input Key, L1 C M
 if Key = b
-  DllCall("SetCursorPos", int, A_ScreenWidth, int, A_ScreenHeight)
+  DllCall("SetCursorPos", int, A_ScreenWidth, int, 0)
 else if (Key = "k" or Key = CTRL_K)
   WinClose A
 else if Key = m
