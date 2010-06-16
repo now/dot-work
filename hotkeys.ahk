@@ -153,6 +153,14 @@ WinWait Exit Application?, Are you sure you want to exit?, 2
 ControlSend Button1, {Enter}
 return
 
+^!c::
+Control Check, , WindowsForms10.Button.app39
+return
+
+#IfWinActive ^Deliver ahk_class WindowsForms10.Window.8.app3
+!d::Control Check, , WindowsForms10.BUTTON.app33
+Enter::!o
+
 #IfWinActive Microsoft Outlook$ ahk_class rctrl_renwnd32
 !s::
 ControlFocus NetUIHWND1
