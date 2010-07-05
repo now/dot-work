@@ -162,8 +162,8 @@ return
 Enter::!o
 
 #IfWinActive Microsoft Outlook$ ahk_class rctrl_renwnd32
-!s::
-ControlFocus NetUIHWND1
+!i::
+ControlFocus NetUIHWND4
 if (ErrorLevel = 0)
   return
 SendInput !s
