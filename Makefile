@@ -83,7 +83,6 @@ APPDATAFILES = \
 	       GHISLER/packers/rar/zip.sfx \
 	       GHISLER/plugins/wcx/7zip/7zip.ini \
 	       GHISLER/plugins/wfx/sftp/rc/wfx_sftp_cfg.xrc \
-	       GHISLER/plugins/wlx/ieview/ieview.ini \
 	       GHISLER/plugins/wlx/imagine/imagine.ini \
 	       GHISLER/plugins/wlx/ttfview/text.pat \
 	       GHISLER/tango.icl \
@@ -120,8 +119,8 @@ APPDATABINFILES = \
 		  GHISLER/plugins/wfx/sftp/sftp.wfx \
 		  GHISLER/plugins/wfx/sftp/wfx_sftp_cfg.dll \
 		  GHISLER/plugins/wlx/gswlx/gswlx.wlx \
-		  GHISLER/plugins/wlx/ieview/ieview.wlx \
 		  GHISLER/plugins/wlx/imagine/imagine.dll \
+		  GHISLER/plugins/wlx/imagine/imagine.wcx \
 		  GHISLER/plugins/wlx/imagine/imagine.wlx \
 		  GHISLER/plugins/wlx/imagine/plugin/j2k.dll \
 		  GHISLER/plugins/wlx/imagine/plugin/jbig.dll \
