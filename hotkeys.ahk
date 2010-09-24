@@ -131,7 +131,7 @@ Escape::!c
 
 Enter::!o
 
-#IfWinActive ^Customer$ ahk_class WindowsForms10.Window.8.app3
+#IfWinActive ^Customer|Employee$ ahk_class WindowsForms10.Window.8.app3
 Escape::WinClose
 
 #IfWinActive ^Nirvana ahk_class WindowsForms10.Window.8.app3
