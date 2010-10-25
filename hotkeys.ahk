@@ -350,6 +350,7 @@ return
 
 #IfWinActive ahk_class illustrator
 F3::
+SendInput !ou!ou!ou
 Saved_KeyDelay := A_KeyDelay
 SetKeyDelay 200
 SendEvent !frj
