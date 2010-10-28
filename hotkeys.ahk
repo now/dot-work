@@ -1,4 +1,4 @@
-#NoEnv
+﻿#NoEnv
 #SingleInstance force
 
 SetTitleMatchMode Regex
@@ -479,19 +479,12 @@ if (Dg = "kk") {
   Hotkey ^k, On
   return
 }
-k := H(Dg)
-digraph := dgs[%k%]
+digraph := digraphs[Dg]
 if (digraph = "") {
-  k := H(SubStr(Dg, 2, 1) . SubStr(Dg, 1, 1))
-  digraph := dgs[%k%]
+  Dg := SubStr(Dg, 2, 1) . SubStr(Dg, 1, 1)
+  digraph := digraphs[Dg]
   if (digraph = "")
     return
 }
-ClipSaved := ClipboardAll
-Transform Clipboard, Unicode, %digraph%
-SendInput %ClipBoard%
-ClipBoard := ClipSaved
-ClipSaved =
+SendInput %digraph%
 return
-
-#a::Run %ProgramFiles%\iTunes\iTunes
