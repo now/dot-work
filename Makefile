@@ -38,13 +38,13 @@ DIFF = diff
 INSTALL = install
 REGEDIT = regedit -s
 
-prefix = /cygdrive/u/NWeibull
-userconfdir = $(prefix)/etc
+prefix = ~
+userconfdir = $(prefix)
 
-ETCFILES = \
+DOTFILES = \
 	   hotkeys.ahk
 
-$(eval $(call GROUP_template,$(ETCFILES),~))
+$(eval $(call GROUP_template,$(DOTFILES),$(userconfdir),.))
 
 LIBFILES = \
 	   lib/autohotkey/comhelper.ahk \
