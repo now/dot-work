@@ -47,7 +47,6 @@ DOTFILES = \
 $(eval $(call GROUP_template,$(DOTFILES),$(userconfdir),.))
 
 LIBFILES = \
-	   lib/autohotkey/comhelper.ahk \
 	   lib/autohotkey/digraphs.ahk
 
 $(eval $(call GROUP_template,$(LIBFILES),~))

@@ -93,6 +93,16 @@ TagEditorSaveAll()
   }
 }
 
+TagEditorSaveAllAsTarget()
+{
+  TagEditor := ComObjActive("TagEditor.Application")
+  Count := TagEditor.Documents.Count
+  loop %Count% {
+    Document := TagEditor.Documents.Item(A_Index - 1)
+    Document.SaveTargetAs(Document.Path . "\" . Document.OriginalName)
+  }
+}
+
 TagEditorCloseAll()
 {
   TagEditor := ComObjActive("TagEditor.Application")
@@ -181,6 +191,8 @@ return
 
 #IfWinActive ^SDL Trados TagEditor
 ^+s::TagEditorSaveAll()
+
+^+F12::TagEditorSaveAllAsTarget()
 
 ^w::SendInput ^{F4}
 
