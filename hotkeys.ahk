@@ -108,7 +108,7 @@ TagEditorCloseAll()
   TagEditor := ComObjActive("TagEditor.Application")
   Count := TagEditor.Documents.Count
   loop %Count% {
-    TagEditor.Documents.Item(Count - (A_Index - 1) - 1).SaveBilingual()
+    TagEditor.Documents.Item(Count - (A_Index - 1) - 1).Close()
   }
 }
 
