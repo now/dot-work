@@ -8,7 +8,6 @@ CTRL_K := Chr(11)
 
 WM_COMMAND := 0x111
 
-#Include lib\autohotkey\comhelper.ahk
 #Include lib\autohotkey\digraphs.ahk
 
 TagEditorNormalMode()
@@ -76,42 +75,31 @@ TagEditorExitNormalModeImpl()
 
 TagEditorVerify()
 {
-  CoInitialize()
-  TagEditor := GetActiveObject("TagEditor.Application")
-  ActiveDocument := Invoke(TagEditor, "ActiveDocument")
-  MessageView := Invoke(ActiveDocument, "MessageView")
-  VisibleBefore := Invoke(MessageView, "Visible")
-  Invoke(ActiveDocument, "Verify")
-  VisibleAfter := Invoke(MessageView, "Visible")
+  TagEditor := ComObjActive("TagEditor.Application")
+  Document := TagEditor.ActiveDocument
+  VisibleBefore := Document.MessageView.Visible
+  Document.Verify()
+  VisibleAfter := Document.MessageView.Visible
   if !VisibleBefore && VisibleAfter
     WinMenuSelectItem, , , View, Toolbars, Messages
-  CoUninitialize()
 }
 
 TagEditorSaveAll()
 {
-  CoInitialize()
-  TagEditor := GetActiveObject("TagEditor.Application")
-  Documents := Invoke(TagEditor, "Documents")
-  Count := Invoke(Documents, "Count")
+  TagEditor := ComObjActive("TagEditor.Application")
+  Count := TagEditor.Documents.Count
   loop %Count% {
-    Document := Invoke(Documents, "Item", A_Index - 1)
-    Invoke(Document, "SaveBilingual")
+    TagEditor.Documents.Item(A_Index - 1).SaveBilingual()
   }
-  CoUninitialize()
 }
 
 TagEditorCloseAll()
 {
-  CoInitialize()
-  TagEditor := GetActiveObject("TagEditor.Application")
-  Documents := Invoke(TagEditor, "Documents")
-  Count := Invoke(Documents, "Count")
+  TagEditor := ComObjActive("TagEditor.Application")
+  Count := TagEditor.Documents.Count
   loop %Count% {
-    Document := Invoke(Documents, "Item", Count - (A_Index - 1) - 1)
-    Invoke(Document, "Close")
+    TagEditor.Documents.Item(Count - (A_Index - 1) - 1).SaveBilingual()
   }
-  CoUninitialize()
 }
 
 #IfWinActive ^Job Overview\*?$ ahk_class WindowsForms10.Window.8.app3
