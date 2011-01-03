@@ -118,9 +118,6 @@ TagEditorCloseAll()
 !u::ControlFocus WindowsForms10.COMBOBOX.app32
 
 !w::
-Control Check, , WindowsForms10.BUTTON.app32
-if (ErrorLevel != 0)
-  return
 SendInput !sWeibull{Enter}
 SendInput !o
 return
