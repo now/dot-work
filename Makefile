@@ -89,16 +89,6 @@ APPDATAFILES = \
 	       GHISLER/totalcmd.ini \
 	       GHISLER/usercmd.ini \
 	       GHISLER/work.ini \
-	       LiteStep/personal/hotkey.rc \
-	       LiteStep/personal/jkey/vk104.txt \
-	       LiteStep/personal/lsxcommand/.keep \
-	       LiteStep/personal/personal.rc \
-	       LiteStep/themes/themeselect.rc \
-	       LiteStep/themes/now/theme.rc \
-	       LiteStep/themes/now/config/base.rc \
-	       LiteStep/themes/now/config/lsxcommand.rc \
-	       LiteStep/themes/now/config/system_tray.rc \
-	       LiteStep/themes/now/config/vwm.rc \
 
 APPDATABINFILES = \
 		  GHISLER/languages/wcmd_now.lng \
