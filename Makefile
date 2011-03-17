@@ -67,13 +67,6 @@ SHAREFILES = \
 
 $(eval $(call GROUP_template,$(SHAREFILES),~))
 
-BINSHAREFILES = \
-		share/themes/ClearLooks/ClearLooks.msstyles \
-		share/themes/ClearLooks/Shell/Human/shellstyle.dll \
-		share/themes/ClearLooks/Shell/NormalColor/shellstyle.dll
-
-$(eval $(call GROUP_template,$(BINSHAREFILES),~,,,755))
-
 APPDATAFILES = \
 	       GHISLER/lsplugin.ini \
 	       GHISLER/no.bar \
